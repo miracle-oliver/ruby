@@ -74,6 +74,8 @@ class TaxCalculator
     end
   end
 
+  # the case the service type and service is onsite service, check the persons location, if it's spain return spanish VAT else return local VAT of that location
   def onsite_service(service_location)
-    service_location == "Spain" ? SPANISH_VAT : "Local VAT (#{service_location})"  end
+    service_location == "Spain" ? SPANISH_VAT : "Local VAT (#{service_location})"
+  end
 end
