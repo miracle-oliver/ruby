@@ -79,3 +79,23 @@ class TaxCalculator
     service_location == "Spain" ? SPANISH_VAT : "Local VAT (#{service_location})"
   end
 end
+
+
+# test
+
+# a buyer from Spain, buying a good and an individual
+tax1 = TaxCalculator.new("Spain", "good", "individual").calculate_tax
+
+# a buyer from Germany, looking for a service, the buyer is a comapny looking for an onsite service
+tax2 = TaxCalculator.new("Germany", "service", "company", "London").calculate_tax
+
+# a buyer from USA looking for a service, he's an individual looking for a digital service
+tax3 = TaxCalculator.new("USA", "service", "individual").calculate_tax
+
+# a buyer fr0m Canada buying a good, he's an individual
+tax4 = TaxCalculator.new("Canada", "good", "individual").calculate_tax
+
+puts tax1 # Output: 21
+puts tax2 # Output: "Local VAT (London)"
+puts tax3 # Output: "No VAT"
+puts tax4 # Output: "Export (No VAT)"
