@@ -49,11 +49,19 @@ class TaxCalculator
     end
   end
 
+  # setting goods, digital_service & onsite_service method to private, because they are only used by the calculate tax method and explicitly needed outside.
+  private
 
+  # in the case the selected product type is goods, check for the buyers location, if it's spain return spainish VAT, else check if the buyer is from an EU country, if yes and the buyer is an individual return the local vat for that location else consider the person as a company and return reverse charge, if the buyer is not from the the EU country, return Export (No VAT) 
   def goods(buyer_location, buyer_type)
-
+    if buyer_location == "Spain"
+      SPANISH_VAT
+    elsif EU_COUNTRIES.include?(buyer_location)
+      buyer_type == "individual" ? "Local VAT (#{buyer_location})" : "Reverse Charge"
+    else
+      "Export (No VAT)"
+    end
   end
-
 
   def digital_service(buyer_location, buyer_type)
 
